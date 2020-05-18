@@ -186,6 +186,23 @@ public class AssignmentClient {
 		Thread.sleep(5000);
 	}
 
+	public void datePickerSend(String dob) {
+		
+		driver.get("https://demoqa.com/datepicker/");
+		WebElement datePicker = driver.findElementByXPath("//h1[@class='entry-title']");
+		if (datePicker.isDisplayed()) {
+			System.out.println("DatePicker Element displayed in Page");
+		} else {
+			Assert.fail("DatePicker Element not displayed in Page");
+		}
+
+		WebElement datePickerElement = driver.findElementByXPath("//input[@id='datepicker']");
+		datePickerElement.sendKeys(dob);
+		datePickerElement.sendKeys(Keys.ENTER);
+		
+		System.out.println("Date of Birth Entered");
+		
+	}
 	/**
 	 * selecting the All the menu options one by one
 	 * 
@@ -428,6 +445,10 @@ public class AssignmentClient {
 	 * Olay Sign in Page validations with invalid Password
 	 */
 	public void signInPageValidation() {
+		
+		// sign in
+		WebElement signIn = driver.findElementByXPath("//a[@class='event_profile_login']");
+		signIn.click();
 
 		WebElement emailAddress = driver.findElementByXPath("//input[@data-key='signInEmailAddress']");
 		WebElement password = driver.findElementByXPath("//input[@data-key='currentPassword']");
@@ -545,14 +566,14 @@ public class AssignmentClient {
 		fromCity.click();
 		WebElement fromCityTxt = driver.findElementByXPath(
 				"//input[@class='react-autosuggest__input react-autosuggest__input--open react-autosuggest__input--focused']");
-		fromCityTxt.sendKeys("Hyderabad");
+		fromCityTxt.sendKeys(System.getProperty("fromcity"));
 		WebElement fromSuggest = driver.findElementByXPath("//li[@id='react-autowhatever-1-section-0-item-0']");
 		fromSuggest.click();
 
 		// Select To city
 		WebElement toCityTxt = driver.findElementByXPath(
 				"//input[@class='react-autosuggest__input react-autosuggest__input--open react-autosuggest__input--focused']");
-		toCityTxt.sendKeys("Bengaluru");
+		toCityTxt.sendKeys(System.getProperty("toCity"));
 		WebElement toSuggest = driver.findElementByXPath("//li[@id='react-autowhatever-1-section-0-item-0']");
 		toSuggest.click();
 
